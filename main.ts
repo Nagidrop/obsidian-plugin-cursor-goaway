@@ -42,7 +42,7 @@ export default class CursorGoaway extends Plugin {
 							// Try to access the CodeMirror instance to check focus state
 							// @ts-ignore - accessing internal cm property
 							const cm = editor.cm;
-							if (cm && cm.hasFocus && cm.hasFocus()) {
+							if (cm && (typeof cm.hasFocus === "function" ? cm.hasFocus() : cm.hasFocus)) {
 								// Editor already has focus, don't jump to top
 								return this.cleanupKeydownHandler();
 							}
